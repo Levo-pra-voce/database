@@ -63,6 +63,16 @@ create table perfil_permissao (
     foreign key (id_permissao) references permissao(id)
 );
 
+create table perfil_usuario(
+    id_perfil bigint,
+    id_usuario bigint,
+    data_criacao timestamp default now(),
+    ativo boolean,
+    primary key (id_perfil, id_usuario),
+    foreign key (id_perfil) references perfil(id),
+    foreign key (id_usuario) references usuario(id)
+);
+
 create table tipo_veiculo (
     id bigserial primary key,
     nome text,
@@ -81,16 +91,6 @@ create table veiculo (
     ativo boolean,
     foreign key (id_usuario) references usuario(id),
     foreign key (id_tipo_veiculo) references tipo_veiculo(id)
-);
-
-create table usuario_veiculo (
-    id_usuario bigint,
-    id_veiculo bigint,
-    data_criacao timestamp default now(),
-    ativo boolean,
-    primary key (id_usuario, id_veiculo),
-    foreign key (id_usuario) references usuario(id),
-    foreign key (id_veiculo) references veiculo(id)
 );
 
 create table avaliacao (

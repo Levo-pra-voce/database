@@ -5,7 +5,8 @@ create table usuario (
     contato text,
     email text,
     data_criacao timestamp default now(),
-    ativo boolean
+    ativo boolean,
+    status text
 );
 
 

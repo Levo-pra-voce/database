@@ -1,9 +1,10 @@
 create table usuario (
     id bigserial primary key,
+    email text,
+    senha text,
     primeiro_nome text,
     sobrenome text,
     contato text,
-    email text,
     data_criacao timestamp default now(),
     ativo boolean,
     status text

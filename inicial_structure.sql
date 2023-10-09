@@ -11,6 +11,21 @@ create table usuario (
     status text
 );
 
+create table endereco (
+    id bigserial primary key,
+    id_usuario bigint,
+    cep text,
+    logradouro text,
+    numero text,
+    complemento text,
+    bairro text,
+    cidade text,
+    estado text,
+    data_criacao timestamp default now(),
+    ativo boolean,
+    foreign key (id_usuario) references usuario(id)
+);
+
 
 create table grupo (
     id bigserial primary key,

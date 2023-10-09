@@ -105,6 +105,7 @@ create table veiculo (
     placa text,
     modelo text,
     cor text,
+    renavam text,
     data_criacao timestamp default now(),
     ativo boolean,
     foreign key (id_usuario) references usuario(id),

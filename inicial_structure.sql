@@ -92,6 +92,9 @@ create table perfil_usuario(
     foreign key (id_usuario) references usuario(id)
 );
 
+insert into perfil (nome, data_criacao, ativo) values ('CLIENTE', now(), true);
+insert into perfil (nome, data_criacao, ativo) values ('ENTREGADOR', now(), true);
+
 create table tipo_veiculo (
     id bigserial primary key,
     nome text,

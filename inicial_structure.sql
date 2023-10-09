@@ -2,6 +2,7 @@ create table usuario (
     id bigserial primary key,
     email text unique,
     senha text,
+    cpf text,
     primeiro_nome text,
     sobrenome text,
     contato text,

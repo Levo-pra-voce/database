@@ -1,3 +1,6 @@
+
+drop table if exists usuario cascade;
+
 create table usuario (
     id bigserial primary key,
     email text unique,
@@ -11,6 +14,8 @@ create table usuario (
     ativo boolean,
     status text
 );
+
+drop table if exists endereco;
 
 create table endereco (
     id bigserial primary key,
@@ -27,6 +32,7 @@ create table endereco (
     foreign key (id_usuario) references usuario(id)
 );
 
+drop table if exists grupo cascade;
 
 create table grupo (
     id bigserial primary key,
@@ -34,6 +40,8 @@ create table grupo (
     data_criacao timestamp default now(),
     ativo boolean
 );
+
+drop table if exists usuario_grupo;
 
 create table usuario_grupo (
     id_usuario bigint,
@@ -44,6 +52,9 @@ create table usuario_grupo (
     foreign key (id_usuario) references usuario(id),
     foreign key (id_grupo) references grupo(id)
 );
+
+
+drop table if exists mensagem;
 
 create table mensagem (
     id bigserial primary key,
@@ -58,6 +69,8 @@ create table mensagem (
     foreign key (id_grupo) references grupo(id)
 );
 
+drop table if exists permissao cascade;
+
 create table permissao (
     id bigserial primary key,
     nome text,
@@ -65,12 +78,16 @@ create table permissao (
     ativo boolean
 );
 
+drop table if exists perfil cascade;
+
 create table perfil (
     id bigserial primary key,
     nome text,
     data_criacao timestamp default now(),
     ativo boolean
 );
+
+drop table if exists perfil_permissao;
 
 create table perfil_permissao (
     id_perfil bigint,
@@ -81,6 +98,8 @@ create table perfil_permissao (
     foreign key (id_perfil) references perfil(id),
     foreign key (id_permissao) references permissao(id)
 );
+
+drop table if exists perfil_usuario;
 
 create table perfil_usuario(
     id_perfil bigint,
@@ -95,12 +114,16 @@ create table perfil_usuario(
 insert into perfil (nome, data_criacao, ativo) values ('CLIENTE', now(), true);
 insert into perfil (nome, data_criacao, ativo) values ('ENTREGADOR', now(), true);
 
+drop table if exists tipo_veiculo cascade;
+
 create table tipo_veiculo (
     id bigserial primary key,
     nome text,
     data_criacao timestamp default now(),
     ativo boolean
 );
+
+drop table if exists veiculo cascade;
 
 create table veiculo (
     id bigserial primary key,
@@ -116,6 +139,8 @@ create table veiculo (
     foreign key (id_tipo_veiculo) references tipo_veiculo(id)
 );
 
+drop table if exists avaliacao;
+
 create table avaliacao (
     id bigserial primary key,
     id_usuario bigint,
@@ -125,4 +150,20 @@ create table avaliacao (
     ativo boolean,
     foreign key (id_usuario) references usuario(id),
     foreign key (id_veiculo) references veiculo(id)
+);
+
+drop table if exists pagamento;
+
+create table pagamento (
+    id bigserial primary key,
+    id_usuario bigint,
+    id_veiculo bigint,
+    id_grupo bigint,
+    valor numeric(10,2),
+    data_criacao timestamp default now(),
+    ativo boolean,
+    status text,
+    foreign key (id_usuario) references usuario(id),
+    foreign key (id_veiculo) references veiculo(id),
+    foreign key (id_grupo) references grupo(id)
 );

@@ -14,7 +14,7 @@ create table usuario (
     status text
 );
 
-drop table if exists endereco;
+drop table if exists endereco cascade;
 
 create table endereco (
     id bigserial primary key,
@@ -167,7 +167,7 @@ create table pagamento (
     foreign key (id_grupo) references grupo(id)
 );
 
-drop table if exists carga;
+drop table if exists carga cascade;
 
 create table carga (
     id bigserial primary key,
@@ -185,7 +185,7 @@ create table carga (
     foreign key (id_pagamento) references pagamento(id)
 );
 
-drop table if exists pedido;
+drop table if exists pedido cascade;
 
 create table pedido (
     id bigserial primary key,
@@ -204,8 +204,8 @@ create table pedido (
     foreign key (id_endereco_destino) references endereco(id)
 );
 
-drop table if exists pedido_carga;
 
+drop table if exists pedido_carga;
 create table pedido_carga (
     id_pedido bigint,
     id_carga bigint,

@@ -134,6 +134,7 @@ create table veiculo (
     renavam text,
     data_criacao timestamp default now(),
     ativo boolean,
+    cnh text,
     foreign key (id_usuario) references usuario(id),
     foreign key (id_tipo_veiculo) references tipo_veiculo(id)
 );
